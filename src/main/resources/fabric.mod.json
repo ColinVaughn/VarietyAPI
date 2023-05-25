@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "varietyapi",
+  "version": "${version}",
+  "name": "VarietyAPI",
+  "description": "API for all variety mods",
+  "authors": [],
+  "contact": {
+    "repo": "https://github.com/Colin Vaughn/VarietyAPI"
+  },
+  "license": "All-Rights-Reserved",
+  "icon": "assets/VarietyAPI/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "org.varietymods.varietyapi.client.VarietyAPIClient"
+    ],
+    "main": [
+      "org.varietymods.varietyapi.VarietyAPI"
+    ]
+  },
+  "mixins": [
+    "VarietyAPI.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}",
+    "geckolib3": "*"
+  }
+}
