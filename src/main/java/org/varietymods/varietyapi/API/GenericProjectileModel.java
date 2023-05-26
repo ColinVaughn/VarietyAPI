@@ -1,11 +1,12 @@
 package org.varietymods.varietyapi.API;
 
 import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 
-public class GenericProjectileModel<T extends LivingEntity & IAnimatable> extends AnimatedGeoModel<T> {
+public class GenericProjectileModel<T extends ProjectileEntity & IAnimatable> extends AnimatedGeoModel<T> {
     private final String modId;
     private final String modelPath;
     private final String texturePath;
