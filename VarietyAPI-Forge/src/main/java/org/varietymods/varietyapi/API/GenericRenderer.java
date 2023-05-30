@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
+import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
@@ -29,12 +30,6 @@ public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEn
         this.scaleBaby = scaleBaby;
         this.isTranslucent = isTranslucent;
         this.hasGlowLayer = hasGlowLayer;
-
-
-        this.shadowRadius = 0.4f;
-        if(hasGlowLayer) {
-            // this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
-        }
     }
 
     @Override
@@ -42,10 +37,12 @@ public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEn
         return new ResourceLocation(modId, "textures/entity/" + texturePath + ".png");
     }
 
+
     @Override
     public RenderType getRenderType(T animatable, float partialTicks, PoseStack stack,
-                                    MultiBufferSource renderTypeBuffer, VertexConsumer vertexBuilder,
-                                    int packedLightIn, ResourceLocation textureLocation) {
+                                    @Nullable MultiBufferSource renderTypeBuffer,
+                                    @Nullable VertexConsumer vertexBuilder, int packedLightIn,
+                                    ResourceLocation textureLocation) {
         if(animatable.isBaby()) {
             stack.scale(scaleBaby, scaleBaby, scaleBaby);
         } else {
@@ -53,5 +50,6 @@ public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEn
         }
         return super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }
+
 
 }

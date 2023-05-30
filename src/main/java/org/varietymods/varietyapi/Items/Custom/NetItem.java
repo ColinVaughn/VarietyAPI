@@ -2,6 +2,7 @@ package org.varietymods.varietyapi.Items.Custom;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
+import net.minecraft.entity.SpawnGroup;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -68,12 +69,14 @@ public class NetItem extends Item {
         for (Entity entity : entities) {
             Box entityBox = entity.getBoundingBox();
             if (entityBox.getXLength() <= 1.0 && entityBox.getYLength() <= 1.0 && entityBox.getZLength() <= 1.0) {
-                double distanceSq = player.getPos().squaredDistanceTo(entity.getPos());
-                if (distanceSq < nearestDistanceSq) {
-                    nearestEntity = entity;
-                    nearestDistanceSq = distanceSq;
-                    if (nearestDistanceSq < 1.0) {
-                        break;
+                if (!(entity.getType() == EntityType.ENDER_DRAGON || entity.getType().getSpawnGroup().asString() == SpawnGroup.MISC.asString())) {
+                    double distanceSq = player.getPos().squaredDistanceTo(entity.getPos());
+                    if (distanceSq < nearestDistanceSq) {
+                        nearestEntity = entity;
+                        nearestDistanceSq = distanceSq;
+                        if (nearestDistanceSq < 1.0) {
+                            break;
+                        }
                     }
                 }
             }
