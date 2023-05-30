@@ -1,5 +1,6 @@
 package org.varietymods.varietyapi.Items.Custom;
 
+import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -11,6 +12,9 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.TypedActionResult;
+import net.minecraft.util.hit.BlockHitResult;
+import net.minecraft.util.hit.HitResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
@@ -35,10 +39,18 @@ public class NetItem extends Item {
                     Entity entity = type.create(world);
                     if (entity != null) {
                         entity.readNbt(entityTag);
-                        entity.refreshPositionAndAngles(player.getX(), player.getY(), player.getZ(), player.getYaw(), player.getPitch());
-                        world.spawnEntity(entity);
-                        itemTag.remove("pickedEntity");
-                        return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+                        // Set the entity's position to the block that the player is looking at
+                        HitResult hitResult = player.raycast(5.0, 1.0F, false);
+                        if (hitResult.getType() == HitResult.Type.BLOCK) {
+                            BlockPos pos = ((BlockHitResult) hitResult).getBlockPos();
+                            if (world.getBlockState(pos).getBlock() == Blocks.ICE) {
+                                pos = pos.up(1); // Adjust the position one block below if it's ice
+                            }
+                            entity.refreshPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), player.getYaw(), player.getPitch());
+                            world.spawnEntity(entity);
+                            itemTag.remove("pickedEntity");
+                            return new TypedActionResult<>(ActionResult.SUCCESS, stack);
+                        }
                     }
                 }
             } else {
@@ -55,6 +67,7 @@ public class NetItem extends Item {
         }
         return new TypedActionResult<>(ActionResult.PASS, stack);
     }
+
 
 
     private Entity rayTraceEntity(PlayerEntity player, double maxDistance) {
