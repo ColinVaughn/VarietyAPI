@@ -10,6 +10,7 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
+import software.bernie.geckolib3.renderers.geo.layer.LayerGlowingAreasGeo;
 
 public class GenericProjectileRenderer<T extends ProjectileEntity & IAnimatable> extends GeoProjectilesRenderer<T> {
 
@@ -24,12 +25,7 @@ public class GenericProjectileRenderer<T extends ProjectileEntity & IAnimatable>
         this.texturePath = texturePath;
         this.isTranslucent = isTranslucent;
         this.hasGlowLayer = hasGlowLayer;
-
-
         this.shadowRadius = 0.4f;
-        if(hasGlowLayer) {
-            // this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
-        }
     }
     @Override
     public Identifier getTextureResource(T instance) {

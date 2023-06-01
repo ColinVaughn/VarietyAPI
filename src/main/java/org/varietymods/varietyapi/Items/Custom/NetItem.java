@@ -43,9 +43,7 @@ public class NetItem extends Item {
                         HitResult hitResult = player.raycast(5.0, 1.0F, false);
                         if (hitResult.getType() == HitResult.Type.BLOCK) {
                             BlockPos pos = ((BlockHitResult) hitResult).getBlockPos();
-                            if (world.getBlockState(pos).getBlock() == Blocks.ICE) {
-                                pos = pos.up(1); // Adjust the position one block below if it's ice
-                            }
+                            pos = pos.up(1);
                             entity.refreshPositionAndAngles(pos.getX(), pos.getY(), pos.getZ(), player.getYaw(), player.getPitch());
                             world.spawnEntity(entity);
                             itemTag.remove("pickedEntity");

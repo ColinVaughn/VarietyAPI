@@ -35,7 +35,7 @@ public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEn
 
         this.shadowRadius = 0.4f;
          if(hasGlowLayer) {
-            // this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
+             //this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
          }
     }
 
