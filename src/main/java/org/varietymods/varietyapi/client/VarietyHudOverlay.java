@@ -42,37 +42,41 @@ public class VarietyHudOverlay extends DrawableHelper implements HudRenderCallba
             if (handStack.isOf(ItemRegistry.NETITEM)) {
                 NbtCompound compound = handStack.getOrCreateNbt();
                 NbtCompound entityTag = compound.getCompound("pickedEntity");
-
-                if(entityTag != null)
+                if(entityTag != null && entityTag.contains("id")) {
                     renderNettedEntity(matrixStack, tickDelta, Registry.ENTITY_TYPE.get(Identifier.tryParse(entityTag.getString("id"))));
+                }
             }
         }
     }
 
+
     public void renderNettedEntity(MatrixStack matrixStack, float tickDelta, EntityType entityType) {
-        matrixStack.push();
+        if (entityType != null) {
+            matrixStack.push();
 
-        Entity entity = entityType.create(client.world);
-        entity.setPos(client.player.getX(), client.player.getY(), client.player.getZ());
+            Entity entity = entityType.create(client.world);
+            entity.setPos(client.player.getX(), client.player.getY(), client.player.getZ());
 
-        int scale = 30;
-        matrixStack.translate(30, 60, 0);
-        matrixStack.scale((float) scale, (float) scale, -(float) scale);
-        matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180));
+            int scale = 30;
+            matrixStack.translate(30, 60, 0);
+            matrixStack.scale((float) scale, (float) scale, -(float) scale);
+            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180));
 
-        float entityRotation = (client.world.getTime() + tickDelta) * 4;
+            float entityRotation = (client.world.getTime() + tickDelta) * 4;
 
-        matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(entityRotation));
+            matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(entityRotation));
 
-        EntityRenderDispatcher entityRenderDispatcher = client.getEntityRenderDispatcher();
-        entityRenderDispatcher.setRenderShadows(false);
-        VertexConsumerProvider.Immediate immediate = client.getBufferBuilders().getEntityVertexConsumers();
+            EntityRenderDispatcher entityRenderDispatcher = client.getEntityRenderDispatcher();
+            entityRenderDispatcher.setRenderShadows(false);
+            VertexConsumerProvider.Immediate immediate = client.getBufferBuilders().getEntityVertexConsumers();
 
-        RenderSystem.runAsFancy(() -> entityRenderDispatcher.render(entity, 0, 0, 0, 0.0F, 1.0F, matrixStack, immediate, 0xF000F0));
-        immediate.draw();
-        entityRenderDispatcher.setRenderShadows(true);
+            RenderSystem.runAsFancy(() -> entityRenderDispatcher.render(entity, 0, 0, 0, 0.0F, 1.0F, matrixStack, immediate, 0xF000F0));
+            immediate.draw();
+            entityRenderDispatcher.setRenderShadows(true);
 
-        matrixStack.pop();
+            matrixStack.pop();
+        }
     }
+
 
 }
