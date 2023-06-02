@@ -1,6 +1,5 @@
 package org.varietymods.varietyapi.Items.Custom;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -19,6 +18,7 @@ import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+
 import java.util.List;
 
 public class NetItem extends Item {
