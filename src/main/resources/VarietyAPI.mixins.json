@@ -4,6 +4,7 @@
   "package": "org.varietymods.varietyapi.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "accesors.EntityAccessor"
   ],
   "client": [
   ],

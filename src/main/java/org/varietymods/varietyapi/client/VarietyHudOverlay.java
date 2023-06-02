@@ -25,6 +25,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3f;
 import net.minecraft.util.registry.Registry;
 import org.varietymods.varietyapi.Items.ItemRegistry;
+import org.varietymods.varietyapi.mixin.accesors.EntityAccessor;
 
 public class VarietyHudOverlay extends DrawableHelper implements HudRenderCallback {
 
@@ -55,6 +56,7 @@ public class VarietyHudOverlay extends DrawableHelper implements HudRenderCallba
             matrixStack.push();
 
             Entity entity = entityType.create(client.world);
+            ((EntityAccessor)entity).setTouchingWater(true);
             entity.setPos(client.player.getX(), client.player.getY(), client.player.getZ());
 
             int scale = 30;
