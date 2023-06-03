@@ -7,16 +7,16 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class GenericVariantRenderer<T extends LivingEntity & IVariantEntity & IAnimatable, V extends Enum<V> & IVariant> extends GeoEntityRenderer<T> {
+public class GenericVariantRenderer<T extends LivingEntity & IVariantEntity & GeoAnimatable, V extends Enum<V> & IVariant> extends GeoEntityRenderer<T> {
     private final float scale;
     private final float scaleBaby;
     private final boolean isTranslucent;
     private final boolean hasGlowLayer;
-    public GenericVariantRenderer(EntityRendererFactory.Context ctx, AnimatedGeoModel<T> model,float scale, float scaleBaby, boolean isTranslucent, boolean hasGlowLayer) {
+    public GenericVariantRenderer(EntityRendererFactory.Context ctx, GeoModel<T> model, float scale, float scaleBaby, boolean isTranslucent, boolean hasGlowLayer) {
         super(ctx, model);
         this.scale = scale;
         this.scaleBaby = scaleBaby;
@@ -42,7 +42,7 @@ public class GenericVariantRenderer<T extends LivingEntity & IVariantEntity & IA
         } else {
             stack.scale(scale, scale, scale);
         }
-        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureResource(animatable))
+        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureLocation(animatable))
                 : super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }
 }

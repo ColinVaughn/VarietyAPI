@@ -2,10 +2,10 @@ package org.varietymods.varietyapi.API;
 
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
 
-public class GenericBlockModel<T extends BlockEntity & IAnimatable> extends AnimatedGeoModel<T> {
+public class GenericBlockModel<T extends BlockEntity & GeoAnimatable> extends GeoModel<T> {
     private String animationFile;
     private String modelFile;
     private String textureFile;

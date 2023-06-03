@@ -7,18 +7,17 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.projectile.ProjectileEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoProjectilesRenderer;
-import software.bernie.geckolib3.renderers.geo.layer.LayerGlowingAreasGeo;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class GenericProjectileRenderer<T extends ProjectileEntity & IAnimatable> extends GeoProjectilesRenderer<T> {
+public class GenericProjectileRenderer<T extends ProjectileEntity & GeoAnimatable> extends GeoEntityRenderer<T> {
 
     private final String modId;
     private final String texturePath;
     private final boolean isTranslucent;
     private final boolean hasGlowLayer;
-    public GenericProjectileRenderer(EntityRendererFactory.Context ctx, AnimatedGeoModel<T> modelProvider, String modId, String texturePath
+    public GenericProjectileRenderer(EntityRendererFactory.Context ctx, GeoModel<T> modelProvider, String modId, String texturePath
                                   , boolean isTranslucent, boolean hasGlowLayer) {
         super(ctx, modelProvider);
         this.modId = modId;

@@ -7,12 +7,12 @@ import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.Identifier;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
-import software.bernie.geckolib3.renderers.geo.layer.LayerGlowingAreasGeo;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.renderer.GeoEntityRenderer;
 
-public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEntityRenderer<T> {
+
+public class GenericRenderer<T extends LivingEntity & GeoAnimatable> extends GeoEntityRenderer<T> {
 
     private final String modId;
     private final float scale;
@@ -22,7 +22,7 @@ public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEn
     private final boolean hasGlowLayer;
 
 
-    public GenericRenderer(EntityRendererFactory.Context ctx, AnimatedGeoModel<T> model, String modId, String texturePath,
+    public GenericRenderer(EntityRendererFactory.Context ctx, GeoModel<T> model, String modId, String texturePath,
                            float scale, float scaleBaby, boolean isTranslucent, boolean hasGlowLayer) {
         super(ctx, model);
         this.modId = modId;
