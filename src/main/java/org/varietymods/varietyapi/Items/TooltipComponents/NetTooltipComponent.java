@@ -1,21 +1,22 @@
 package org.varietymods.varietyapi.Items.TooltipComponents;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
-import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
 import net.minecraft.client.render.item.ItemRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ItemEntity;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.passive.SquidEntity;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NbtCompound;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3f;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import org.varietymods.varietyapi.Items.ItemRegistry;
 import org.varietymods.varietyapi.mixin.accesors.EntityAccessor;
 
 public class NetTooltipComponent implements TooltipComponent {
@@ -41,14 +42,25 @@ public class NetTooltipComponent implements TooltipComponent {
     @Override
     public void drawItems(TextRenderer textRenderer, int x, int y, MatrixStack matrices, ItemRenderer itemRenderer, int z) {
         World world = MinecraftClient.getInstance().world;
-        Entity entity = netData.type().create(world);
-        ((EntityAccessor) entity).setTouchingWater(true);
-        EntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
+        ItemStack handStack = MinecraftClient.getInstance().player.getMainHandStack();
 
-        matrices.push();
-        matrices.translate(2, 2, z);
-        renderEntity(matrices, x, y, entity);
-        matrices.pop();
+        if (handStack.isOf(ItemRegistry.NETITEM)) {
+            NbtCompound compound = handStack.getOrCreateNbt();
+            if (compound.contains("pickedEntity")) {
+                NbtCompound entityTag = compound.getCompound("pickedEntity");
+                EntityType<?> entityType = Registry.ENTITY_TYPE.get(Identifier.tryParse(entityTag.getString("id")));
+                if (entityType != null) {
+                    Entity entity = entityType.create(world);
+                    ((EntityAccessor) entity).setTouchingWater(true);
+                    EntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
+
+                    matrices.push();
+                    matrices.translate(2, 2, z);
+                    renderEntity(matrices, x, y, entity);
+                    matrices.pop();
+                }
+            }
+        }
 
         TooltipComponent.super.drawItems(textRenderer, x, y, matrices, itemRenderer, z);
     }
