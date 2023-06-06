@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class FluidRendererMixin {
 
     @Inject(method = "render", at = @At("HEAD"))
-    public void renderInject(BlockRenderView world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfo ci) {
+    public void renderInject(BlockRenderView world, BlockPos pos, VertexConsumer vertexConsumer, BlockState blockState, FluidState fluidState, CallbackInfoReturnable<Boolean> cir) {
         //vertexConsumer.color(pos.getX(), pos.getY(), pos.getZ(), 255);
     }
 

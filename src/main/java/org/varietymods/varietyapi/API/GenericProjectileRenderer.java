@@ -28,7 +28,7 @@ public class GenericProjectileRenderer<T extends ProjectileEntity & IAnimatable>
         this.shadowRadius = 0.4f;
     }
     @Override
-    public Identifier getTextureResource(T instance) {
+    public Identifier getTextureLocation(T instance) {
         return new Identifier(modId, "textures/entity/" + texturePath + ".png");
     }
     @Override
@@ -36,7 +36,7 @@ public class GenericProjectileRenderer<T extends ProjectileEntity & IAnimatable>
                                      VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
                                      int packedLightIn, Identifier textureLocation) {
 
-        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureResource(animatable))
+        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureLocation(animatable))
                 : super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }
 }

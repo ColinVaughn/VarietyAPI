@@ -29,7 +29,7 @@ public class GenericVariantRenderer<T extends LivingEntity & IVariantEntity & IA
     }
 
     @Override
-    public Identifier getTextureResource(T instance) {
+    public Identifier getTextureLocation(T instance) {
         return instance.getVariant().getTextureResource();
     }
 
@@ -42,7 +42,7 @@ public class GenericVariantRenderer<T extends LivingEntity & IVariantEntity & IA
         } else {
             stack.scale(scale, scale, scale);
         }
-        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureResource(animatable))
+        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureLocation(animatable))
                 : super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
     }
 }

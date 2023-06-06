@@ -18,17 +18,17 @@ public class GenericVariantModel<T extends LivingEntity & IVariantEntity & IAnim
     }
 
     @Override
-    public Identifier getModelResource(T object) {
+    public Identifier getModelLocation(T object) {
         return new Identifier(modId,"geo/"+ modelResourcePath+".json");
     }
 
     @Override
-    public Identifier getTextureResource(T object) {
+    public Identifier getTextureLocation(T object) {
         return object.getVariant().getTextureResource();
     }
 
     @Override
-    public Identifier getAnimationResource(T animatable) {
+    public Identifier getAnimationFileLocation(T animatable) {
         return new Identifier(modId, "animations/"+animationResourcePath+".json");
     }
 }

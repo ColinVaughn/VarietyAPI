@@ -21,17 +21,17 @@ public class GenericBlockModel<T extends BlockEntity & IAnimatable> extends Anim
     }
 
     @Override
-    public Identifier getAnimationResource(T entity) {
+    public Identifier getAnimationFileLocation(T entity) {
         return new Identifier(modid, "animations/"+animationFile+".json");
     }
 
     @Override
-    public Identifier getModelResource(T animatable) {
+    public Identifier getModelLocation(T animatable) {
         return new Identifier(modid, "geo/"+modelFile);
     }
 
     @Override
-    public Identifier getTextureResource(T entity) {
+    public Identifier getTextureLocation(T entity) {
         return new Identifier(modid,"textures/block/"+textureFile+".png");
     }
 }

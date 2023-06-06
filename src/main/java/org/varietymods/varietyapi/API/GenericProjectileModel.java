@@ -20,17 +20,17 @@ public class GenericProjectileModel<T extends ProjectileEntity & IAnimatable> ex
     }
 
     @Override
-    public Identifier getModelResource(T object) {
+    public Identifier getModelLocation(T object) {
         return new Identifier(modId, "geo/"+ modelPath+".json");
     }
 
     @Override
-    public Identifier getTextureResource(T object) {
+    public Identifier getTextureLocation(T object) {
         return new Identifier(modId, "textures/entity/"+texturePath+".png");
     }
 
     @Override
-    public Identifier getAnimationResource(T animatable) {
+    public Identifier getAnimationFileLocation(T animatable) {
         if ("null".equals(animationPath)) {
             return null;
         }
