@@ -10,7 +10,7 @@ import org.varietymods.varietyapi.VarietyAPI;
 public class ItemRegistry {
 
     public static final Item NETITEM = registerItem("net_item",
-            new NetItem(new FabricItemSettings().group(ModItemGroup.VARIETY_MODS)));
+            new NetItem(new FabricItemSettings().group(ModItemGroup.VARIETY_MODS).maxCount(1)));
     public static Item registerItem(String name, Item item) {
         return Registry.register(Registry.ITEM, new Identifier(VarietyAPI.MOD_ID, name), item);
     }
