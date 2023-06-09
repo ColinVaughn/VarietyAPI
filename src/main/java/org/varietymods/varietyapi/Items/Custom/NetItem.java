@@ -76,7 +76,7 @@ public class NetItem extends Item {
         Vec3d lookVec = player.getRotationVec(1.0F);
         Vec3d endVec = startVec.add(lookVec.x * maxDistance, lookVec.y * maxDistance, lookVec.z * maxDistance);
         Box box = new Box(startVec, endVec);
-        List<Entity> entities = player.world.getOtherEntities(player, box);
+        List<Entity> entities = player.getWorld().getOtherEntities(player, box);
         Entity nearestEntity = null;
         double nearestDistanceSq = maxDistance * maxDistance;
 

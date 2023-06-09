@@ -2,6 +2,7 @@ package org.varietymods.varietyapi.Items.TooltipComponents;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -40,7 +41,7 @@ public class NetTooltipComponent implements TooltipComponent {
     }
 
     @Override
-    public void drawItems(TextRenderer textRenderer, int x, int y, MatrixStack matrices, ItemRenderer itemRenderer) {
+    public void drawItems(TextRenderer textRenderer, int x, int y, DrawContext context) {
         World world = MinecraftClient.getInstance().world;
         ItemStack handStack = MinecraftClient.getInstance().player.getMainHandStack();
 
@@ -56,13 +57,13 @@ public class NetTooltipComponent implements TooltipComponent {
 
                     matrices.push();
                     matrices.translate(2, 2, 1);
-                    renderEntity(matrices, x, y, entity);
+                    renderEntity(context.getMatrices(), x, y, entity);
                     matrices.pop();
                 }
             }
         }
 
-        TooltipComponent.super.drawItems(textRenderer, x, y, matrices, itemRenderer);
+        TooltipComponent.super.drawItems(textRenderer, x, y, context, itemRenderer);
     }
 
     protected void renderEntity(MatrixStack matrices, int x, int y, Entity entity) {

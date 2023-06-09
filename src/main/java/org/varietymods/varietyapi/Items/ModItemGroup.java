@@ -12,7 +12,7 @@ public class ModItemGroup {
 
     public static void registerItemGroups() {
 
-        VARIETY_MODS = FabricItemGroup.builder(new Identifier(VarietyAPI.MOD_ID, "variety_mods"))
+        VARIETY_MODS = FabricItemGroup.builder()
                 .displayName(Text.translatable("itemgroup.variety_mods"))
                 .icon(() -> new ItemStack(ItemRegistry.NETITEM)).build();
     }
