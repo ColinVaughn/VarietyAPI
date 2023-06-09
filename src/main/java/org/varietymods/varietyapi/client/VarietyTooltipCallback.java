@@ -4,7 +4,6 @@ import net.fabricmc.fabric.api.client.rendering.v1.TooltipComponentCallback;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.tooltip.TooltipComponent;
 import net.minecraft.client.item.TooltipData;
-import net.minecraft.item.BundleItem;
 import org.jetbrains.annotations.Nullable;
 import org.varietymods.varietyapi.Items.TooltipComponents.NetTooltipComponent;
 import org.varietymods.varietyapi.Items.TooltipComponents.NetTooltipData;

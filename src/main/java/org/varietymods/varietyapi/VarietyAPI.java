@@ -23,7 +23,5 @@ public class VarietyAPI implements ModInitializer {
         ModItemGroup.registerItemGroups();
         GeckoLib.initialize();
         ItemRegistry.registerModItems();
-
-
     }
 }

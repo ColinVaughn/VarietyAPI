@@ -1,5 +1,6 @@
 package org.varietymods.varietyapi.Items.Custom;
 
+import net.minecraft.client.item.TooltipData;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
@@ -18,8 +19,10 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Box;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
+import org.varietymods.varietyapi.Items.TooltipComponents.NetTooltipData;
 
 import java.util.List;
+import java.util.Optional;
 
 public class NetItem extends Item {
     public NetItem(Settings settings) {
@@ -96,6 +99,12 @@ public class NetItem extends Item {
         return nearestEntity;
     }
 
+    @Override
+    public Optional<TooltipData> getTooltipData(ItemStack stack) {
+        NbtCompound itemTag = stack.getOrCreateNbt();
+        NbtCompound entityTag = itemTag.getCompound("pickedEntity");
+        EntityType<?> type = Registries.ENTITY_TYPE.get(Identifier.tryParse(entityTag.getString("id")));
 
-
+        return Optional.of(new NetTooltipData(type));
+    }
 }
