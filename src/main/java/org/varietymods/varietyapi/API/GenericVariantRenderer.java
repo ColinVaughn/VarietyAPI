@@ -29,20 +29,18 @@ public class GenericVariantRenderer<T extends LivingEntity & IVariantEntity & Ge
     }
 
     @Override
-    public Identifier getTextureResource(T instance) {
-        return instance.getVariant().getTextureResource();
+    public Identifier getTextureLocation(T instance) {
+        return instance.getVariant().getTextureLocation();
     }
 
     @Override
-    public RenderLayer getRenderType(T animatable, float partialTicks, MatrixStack stack,
-                                     VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
-                                     int packedLightIn, Identifier textureLocation) {
+    public void render(T animatable,float entityYaw, float partialTick, MatrixStack poseStack,
+                                     VertexConsumerProvider bufferSource, int packedLight) {
         if(animatable.isBaby()) {
-            stack.scale(scaleBaby, scaleBaby, scaleBaby);
+            poseStack.scale(scaleBaby, scaleBaby, scaleBaby);
         } else {
-            stack.scale(scale, scale, scale);
+            poseStack.scale(scale, scale, scale);
         }
-        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureLocation(animatable))
-                : super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
+        super.render(animatable, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }

@@ -24,7 +24,7 @@ public class GenericVariantModel<T extends LivingEntity & IVariantEntity & GeoAn
 
     @Override
     public Identifier getTextureResource(T object) {
-        return object.getVariant().getTextureResource();
+        return object.getVariant().getTextureLocation();
     }
 
     @Override

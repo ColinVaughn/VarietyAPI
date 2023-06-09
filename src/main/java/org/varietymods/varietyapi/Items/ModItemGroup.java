@@ -1,11 +1,19 @@
 package org.varietymods.varietyapi.Items;
 
-import net.fabricmc.fabric.api.client.itemgroup.FabricItemGroupBuilder;
+import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.varietymods.varietyapi.VarietyAPI;
 
 public class ModItemGroup {
-    public static final net.minecraft.item.ItemGroup VARIETY_MODS = FabricItemGroupBuilder.build(
-            new Identifier(VarietyAPI.MOD_ID, "variety_mods"), () -> new ItemStack(ItemRegistry.NETITEM));
+    public static ItemGroup VARIETY_MODS;
+
+    public static void registerItemGroups() {
+
+        VARIETY_MODS = FabricItemGroup.builder(new Identifier(VarietyAPI.MOD_ID, "variety_mods"))
+                .displayName(Text.translatable("itemgroup.variety_mods"))
+                .icon(() -> new ItemStack(ItemRegistry.NETITEM)).build();
+    }
 }

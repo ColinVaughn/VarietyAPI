@@ -9,6 +9,7 @@ import net.minecraft.util.Identifier;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.varietymods.varietyapi.Items.ItemRegistry;
+import org.varietymods.varietyapi.Items.ModItemGroup;
 import software.bernie.geckolib.GeckoLib;
 
 public class VarietyAPI implements ModInitializer {
@@ -17,14 +18,12 @@ public class VarietyAPI implements ModInitializer {
     public static Identifier id(String path) {
         return new Identifier(MOD_ID, path);
     }
-    public static ItemGroup modGroup  = FabricItemGroup.builder(id(MOD_ID)).displayName(Text.translatable("varietyaquatic.test_group"))
-            .icon(()-> new ItemStack(ItemRegistry.NETITEM))
-            .build();
     @Override
     public void onInitialize() {
-
+        ModItemGroup.registerItemGroups();
         GeckoLib.initialize();
         ItemRegistry.registerModItems();
+
 
     }
 }

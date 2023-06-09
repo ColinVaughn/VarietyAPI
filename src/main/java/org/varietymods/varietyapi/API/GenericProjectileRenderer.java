@@ -27,15 +27,12 @@ public class GenericProjectileRenderer<T extends ProjectileEntity & GeoAnimatabl
         this.shadowRadius = 0.4f;
     }
     @Override
-    public Identifier getTextureResource(T instance) {
+    public Identifier getTextureLocation(T instance) {
         return new Identifier(modId, "textures/entity/" + texturePath + ".png");
     }
     @Override
-    public RenderLayer getRenderType(T animatable, float partialTicks, MatrixStack stack,
-                                     VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
-                                     int packedLightIn, Identifier textureLocation) {
-
-        return isTranslucent ? RenderLayer.getEntityTranslucent(getTextureResource(animatable))
-                : super.getRenderType(animatable, partialTicks, stack, renderTypeBuffer, vertexBuilder, packedLightIn, textureLocation);
+    public void render(T animatable,float entityYaw, float partialTick, MatrixStack poseStack,
+                       VertexConsumerProvider bufferSource, int packedLight) {
+        super.render(animatable, entityYaw, partialTick, poseStack, bufferSource, packedLight);
     }
 }
