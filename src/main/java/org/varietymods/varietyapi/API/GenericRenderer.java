@@ -34,9 +34,9 @@ public class GenericRenderer<T extends LivingEntity & GeoAnimatable> extends Geo
 
 
         this.shadowRadius = 0.4f;
-         if(hasGlowLayer) {
-             //this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
-         }
+        if(hasGlowLayer) {
+            //this.addLayer(new LayerGlowingAreasGeo<>(this, getGeoModelProvider()::getTextureResource, getGeoModelProvider()::getModelResource, RenderLayer::getEntityTranslucentEmissive));
+        }
     }
 
     @Override
@@ -45,13 +45,14 @@ public class GenericRenderer<T extends LivingEntity & GeoAnimatable> extends Geo
     }
 
     @Override
-    public void render(T animatable,float entityYaw, float partialTick, MatrixStack poseStack,
-                       VertexConsumerProvider bufferSource, int packedLight) {
+    public void render(T animatable, float entityYaw, float partialTick, MatrixStack poseStack,
+                                     VertexConsumerProvider bufferSource, int packedLight){
         if(animatable.isBaby()) {
             poseStack.scale(scaleBaby, scaleBaby, scaleBaby);
         } else {
             poseStack.scale(scale, scale, scale);
         }
         super.render(animatable, entityYaw, partialTick, poseStack, bufferSource, packedLight);
+
     }
 }
