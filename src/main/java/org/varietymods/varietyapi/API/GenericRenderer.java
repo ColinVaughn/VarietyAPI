@@ -1,7 +1,5 @@
 package org.varietymods.varietyapi.API;
 
-import net.minecraft.client.render.RenderLayer;
-import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRendererFactory;
 import net.minecraft.client.util.math.MatrixStack;
@@ -46,7 +44,7 @@ public class GenericRenderer<T extends LivingEntity & GeoAnimatable> extends Geo
 
     @Override
     public void render(T animatable, float entityYaw, float partialTick, MatrixStack poseStack,
-                                     VertexConsumerProvider bufferSource, int packedLight){
+                       VertexConsumerProvider bufferSource, int packedLight){
         if(animatable.isBaby()) {
             poseStack.scale(scaleBaby, scaleBaby, scaleBaby);
         } else {
