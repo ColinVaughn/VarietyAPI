@@ -13,9 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.RotationAxis;
 import org.varietymods.varietyapi.Items.ItemRegistry;
-
-import java.rmi.registry.Registry;
 
 public class VarietyHudOverlay extends DrawableHelper implements HudRenderCallback {
 
@@ -51,11 +50,11 @@ public class VarietyHudOverlay extends DrawableHelper implements HudRenderCallba
             int scale = 30;
             matrixStack.translate(30, 60, 0);
             matrixStack.scale((float) scale, (float) scale, -(float) scale);
-            matrixStack.multiply(Vec3f.POSITIVE_X.getDegreesQuaternion(180));
+            matrixStack.multiply(RotationAxis.POSITIVE_X.rotationDegrees(180));
 
             float entityRotation = (client.world.getTime() + tickDelta) * 4;
 
-            matrixStack.multiply(Vec3f.POSITIVE_Y.getDegreesQuaternion(entityRotation));
+            matrixStack.multiply(RotationAxis.POSITIVE_Y.rotationDegrees(entityRotation));
 
             EntityRenderDispatcher entityRenderDispatcher = client.getEntityRenderDispatcher();
             entityRenderDispatcher.setRenderShadows(false);
