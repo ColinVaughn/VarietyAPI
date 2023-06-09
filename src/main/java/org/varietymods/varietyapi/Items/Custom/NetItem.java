@@ -7,6 +7,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
+import net.minecraft.registry.Registries;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.Identifier;
@@ -33,7 +34,7 @@ public class NetItem extends Item {
             if (itemTag.contains("pickedEntity")) {
                 // Spawn the stored entity
                 NbtCompound entityTag = itemTag.getCompound("pickedEntity");
-                EntityType<?> type = Registry.ENTITY_TYPE.get(Identifier.tryParse(entityTag.getString("id")));
+                EntityType<?> type = Registries.ENTITY_TYPE.get(Identifier.tryParse(entityTag.getString("id")));
                 if (type != null) {
                     Entity entity = type.create(world);
                     if (entity != null) {
