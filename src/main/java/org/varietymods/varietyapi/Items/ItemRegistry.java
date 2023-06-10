@@ -15,19 +15,12 @@ public class ItemRegistry {
 
     public static final Item NETITEM = registerItem("net_item",
             new NetItem(new FabricItemSettings()));
-    public static Item registerItem(String name, Item item) {
+    private static Item registerItem(String name, Item item) {
         return Registry.register(Registries.ITEM, new Identifier(VarietyAPI.MOD_ID, name), item);
     }
-    public static void addItemsToItemGroup() {
-        addToItemGroup(ModItemGroup.VARIETY_MODS, NETITEM);
-    }
 
-    private static void addToItemGroup(ItemGroup group, Item item) {
-        ItemGroupEvents.modifyEntriesEvent(group).register(entries -> entries.add(item));
-    }
 
     public static void registerModItems() {
         VarietyAPI.LOGGER.debug("Registering Mod Items for " + VarietyAPI.MOD_ID);
-        addItemsToItemGroup();
     }
 }
