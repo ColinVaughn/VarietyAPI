@@ -3,6 +3,7 @@ package org.varietymods.varietyapi.client;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.fabricmc.fabric.api.client.rendering.v1.HudRenderCallback;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.EntityRenderDispatcher;
@@ -17,16 +18,18 @@ import net.minecraft.util.math.RotationAxis;
 import org.varietymods.varietyapi.Items.ItemRegistry;
 import org.varietymods.varietyapi.mixin.accesors.EntityAccessor;
 
-public class VarietyHudOverlay extends DrawableHelper implements HudRenderCallback {
+public class VarietyHudOverlay extends DrawContext implements HudRenderCallback {
 
     private final MinecraftClient client;
 
-    public VarietyHudOverlay(MinecraftClient client) {
+    public VarietyHudOverlay(MinecraftClient client, VertexConsumerProvider.Immediate vertexConsumers) {
+        super(client, vertexConsumers);
         this.client = client;
     }
 
+
     @Override
-    public void onHudRender(MatrixStack matrixStack, float tickDelta) {
+    public void onHudRender(DrawContext drawContext, float tickDelta) {
         if(MinecraftClient.getInstance().player != null) {
             ItemStack handStack = MinecraftClient.getInstance().player.getMainHandStack();
 
@@ -34,7 +37,7 @@ public class VarietyHudOverlay extends DrawableHelper implements HudRenderCallba
                 NbtCompound compound = handStack.getOrCreateNbt();
                 NbtCompound entityTag = compound.getCompound("pickedEntity");
                 if(entityTag != null && entityTag.contains("id")) {
-                    renderNettedEntity(matrixStack, tickDelta, Registries.ENTITY_TYPE.get(Identifier.tryParse(entityTag.getString("id"))));
+                    renderNettedEntity(drawContext.getMatrices(), tickDelta, Registries.ENTITY_TYPE.get(Identifier.tryParse(entityTag.getString("id"))));
                 }
             }
         }
