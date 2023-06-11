@@ -14,19 +14,15 @@ import software.bernie.geckolib3.renderers.geo.layer.LayerGlowingAreasGeo;
 
 public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEntityRenderer<T> {
 
-    private final String modId;
     private final float scale;
     private final float scaleBaby;
-    private final String texturePath;
     private final boolean isTranslucent;
     private final boolean hasGlowLayer;
 
 
-    public GenericRenderer(EntityRendererFactory.Context ctx, AnimatedGeoModel<T> model, String modId, String texturePath,
+    public GenericRenderer(EntityRendererFactory.Context ctx, AnimatedGeoModel<T> model,
                            float scale, float scaleBaby, boolean isTranslucent, boolean hasGlowLayer) {
         super(ctx, model);
-        this.modId = modId;
-        this.texturePath = texturePath;
         this.scale = scale;
         this.scaleBaby = scaleBaby;
         this.isTranslucent = isTranslucent;
