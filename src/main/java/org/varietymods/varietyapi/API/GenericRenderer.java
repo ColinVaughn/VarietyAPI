@@ -40,11 +40,6 @@ public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEn
     }
 
     @Override
-    public Identifier getTextureResource(T instance) {
-        return new Identifier(modId, "textures/entity/" + texturePath + ".png");
-    }
-
-    @Override
     public RenderLayer getRenderType(T animatable, float partialTicks, MatrixStack stack,
                                      VertexConsumerProvider renderTypeBuffer, VertexConsumer vertexBuilder,
                                      int packedLightIn, Identifier textureLocation) {
