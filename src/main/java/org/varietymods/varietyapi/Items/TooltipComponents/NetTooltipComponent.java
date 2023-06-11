@@ -55,15 +55,15 @@ public class NetTooltipComponent implements TooltipComponent {
                     ((EntityAccessor) entity).setTouchingWater(true);
                     EntityRenderDispatcher dispatcher = MinecraftClient.getInstance().getEntityRenderDispatcher();
 
-                    matrices.push();
-                    matrices.translate(2, 2, 1);
-                    renderEntity(matrices, x, y, entity);
-                    matrices.pop();
+                    context.getMatrices().push();
+                    context.getMatrices().translate(2, 2, 1);
+                    renderEntity(context.getMatrices(), x, y, entity);
+                    context.getMatrices().pop();
                 }
             }
         }
 
-        TooltipComponent.super.drawItems(textRenderer, x, y, matrices, itemRenderer);
+        TooltipComponent.super.drawItems(textRenderer, x, y, context);
     }
 
     protected void renderEntity(MatrixStack matrices, int x, int y, Entity entity) {
