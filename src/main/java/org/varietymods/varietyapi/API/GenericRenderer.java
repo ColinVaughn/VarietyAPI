@@ -10,7 +10,6 @@ import net.minecraft.util.Identifier;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.renderers.geo.GeoEntityRenderer;
-import software.bernie.geckolib3.renderers.geo.layer.LayerGlowingAreasGeo;
 
 public class GenericRenderer<T extends LivingEntity & IAnimatable> extends GeoEntityRenderer<T> {
 
