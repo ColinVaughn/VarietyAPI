@@ -85,4 +85,8 @@ publishing {
         // The repositories here will be used for publishing your artifact, not for
         // retrieving dependencies.
     }
+    loom {
+    }
+
 }
+
